@@ -10,7 +10,7 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 const login = async (event) => {
-  event?.preventDefault()
+  event?.preventDefault();
   const data = await authStore.login(email.value, password.value);
   if ("error" in data) {
     email.value = "";

@@ -10,7 +10,7 @@ const router = useRouter();
 const authStore = useAuthStore();
 
 const register = async (event) => {
-  event?.preventDefault()
+  event?.preventDefault();
   const data = await authStore.register(email.value, password.value);
   if ("error" in data) {
     email.value = "";
@@ -22,8 +22,8 @@ const register = async (event) => {
 };
 
 const passwordMatch = computed(() => {
-  return password.value === confirmPassword.value
-})
+  return password.value === confirmPassword.value;
+});
 </script>
 <template>
   <div class="w-full h-screen flex justify-center items-center">
@@ -46,12 +46,16 @@ const passwordMatch = computed(() => {
         v-model="password"
       />
       <input
-        :class="`w-full ${passwordMatch ? 'mb-[8px]' : 'mb-[3px]'}  lg:w-1/2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`"
+        :class="`w-full ${
+          passwordMatch ? 'mb-[8px]' : 'mb-[3px]'
+        }  lg:w-1/2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500`"
         type="password"
         placeholder="Confirm Password"
         v-model="confirmPassword"
       />
-      <p class="mb-[8px] text-red-500 font-medium" v-if="!passwordMatch">Passwords do not match</p>
+      <p class="mb-[8px] text-red-500 font-medium" v-if="!passwordMatch">
+        Passwords do not match
+      </p>
       <button
         type="submit"
         class="w-full mb-[3px] lg:w-1/2 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
