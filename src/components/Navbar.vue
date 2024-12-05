@@ -3,7 +3,6 @@ import { Icon } from "@iconify/vue";
 import { RouterLink, useRouter } from "vue-router";
 import { ref, computed } from "vue";
 import { useAuthStore } from "../stores/authStore";
-import { auth } from "../firebase";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -22,7 +21,7 @@ const toggleMenu = () => {
 
 const handleLogout = () => {
   authStore.logout();
-  mobileMenuOpen.value = false
+  mobileMenuOpen.value = false;
   router.push("/login");
 };
 </script>

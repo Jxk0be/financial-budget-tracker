@@ -10,7 +10,6 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 const authStore = useAuthStore();
 
 onMounted(() => {
-  console.log(import.meta.env.VITE_API_KEY)
   /* This function */
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     if (user) {
