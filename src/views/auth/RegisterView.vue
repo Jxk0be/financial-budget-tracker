@@ -2,12 +2,14 @@
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/authStore";
+import { useNavStore } from "../../stores/navStore";
 
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const router = useRouter();
 const authStore = useAuthStore();
+const navStore = useNavStore();
 
 const register = async (event) => {
   event?.preventDefault();
@@ -18,6 +20,7 @@ const register = async (event) => {
     console.log(data?.error);
     return;
   }
+  navStore.setNavStatus(false);
   router.push("/");
 };
 
@@ -26,7 +29,9 @@ const passwordMatch = computed(() => {
 });
 </script>
 <template>
-  <div class="xl:px-0 lg:px-[24px] px-[16px] w-full h-screen flex justify-center items-center">
+  <div
+    class="xl:px-0 lg:px-[24px] px-[16px] w-full h-screen flex justify-center items-center"
+  >
     <form
       class="w-full h-full md:w-[1/3] md:h-[500px] flex flex-col justify-center items-center"
     >
