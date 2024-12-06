@@ -3,11 +3,13 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/authStore";
 import { Icon } from "@iconify/vue";
+import { useNavStore } from "../../stores/navStore";
 
 const email = ref("");
 const password = ref("");
 const router = useRouter();
 const authStore = useAuthStore();
+const navStore = useNavStore();
 
 const login = async (event) => {
   event?.preventDefault();
@@ -18,6 +20,7 @@ const login = async (event) => {
     console.log(data?.error);
     return;
   }
+  navStore.setNavStatus(false);
   router.push("/");
 };
 
@@ -29,6 +32,7 @@ const signInWithGoogle = async () => {
     console.log(data?.error);
     return;
   }
+  navStore.setNavStatus(false);
   router.push("/");
 };
 </script>
