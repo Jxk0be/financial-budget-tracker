@@ -34,7 +34,7 @@ const signInWithGoogle = async () => {
 </script>
 <template>
   <div
-    class="w-full min-w-[235px] h-screen flex flex-col justify-center items-center"
+    class="xl:px-0 lg:px-[24px] px-[16px] w-full min-w-[235px] h-screen flex flex-col justify-center items-center"
   >
     <form class="w-full md:w-[1/3] flex flex-col justify-center items-center">
       <h1 class="text-3xl font-semibold text-gray-700 mb-[12px]">

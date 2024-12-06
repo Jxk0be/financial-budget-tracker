@@ -26,7 +26,7 @@ const passwordMatch = computed(() => {
 });
 </script>
 <template>
-  <div class="w-full h-screen flex justify-center items-center">
+  <div class="xl:px-0 lg:px-[24px] px-[16px] w-full h-screen flex justify-center items-center">
     <form
       class="w-full h-full md:w-[1/3] md:h-[500px] flex flex-col justify-center items-center"
     >

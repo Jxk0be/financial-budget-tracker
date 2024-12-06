@@ -6,7 +6,7 @@ const entryView = ref(true);
 </script>
 <template>
   <div
-    class="md:pt-[70px] xl:px-0 lg:px-[24px] md:px-[16px] px-[16px] flex-col flex w-full h-screen"
+    class="md:pt-[70px] xl:px-0 lg:px-[24px] px-[16px] flex-col flex w-full h-screen"
   >
     <Doughnut :entryView />
     <div
