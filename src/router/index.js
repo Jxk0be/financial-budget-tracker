@@ -4,6 +4,7 @@ import HistoryView from "../views/History.vue";
 import LoginView from "../views/auth/LoginView.vue";
 import RegisterView from "../views/auth/RegisterView.vue";
 import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const router = createRouter({
   history: createWebHistory("/"),
@@ -37,9 +38,22 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
+const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const removeListener = onAuthStateChanged(
+      auth,
+      (user) => {
+        removeListener();
+        resolve(user);
+      },
+      reject
+    );
+  });
+};
+
+router.beforeEach(async (to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (auth.currentUser) {
+    if (await getCurrentUser()) {
       if (to.name === "login" || to.name === "register") next("/");
       else next();
     } else {

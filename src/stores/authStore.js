@@ -57,7 +57,7 @@ export const useAuthStore = defineStore("auth", {
         const data = await signInWithPopup(auth, googleProvider);
         return data;
       } catch (error) {
-        return null;
+        return error
       }
     },
     login: async (email, pass) => {

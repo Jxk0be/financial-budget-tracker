@@ -33,9 +33,9 @@ const signInWithGoogle = async () => {
 };
 </script>
 <template>
-  <div class="w-full h-screen flex justify-center items-center">
+  <div class="w-full min-w-[235px] h-screen flex flex-col justify-center items-center">
     <form
-      class="w-full h-full md:w-[1/3] md:h-[500px] flex flex-col justify-center items-center"
+      class="w-full md:w-[1/3] flex flex-col justify-center items-center"
     >
       <h1 class="text-3xl font-semibold text-gray-700 mb-[12px]">
         Login to Account
@@ -59,17 +59,14 @@ const signInWithGoogle = async () => {
       >
         Submit
       </button>
-      <button
-        class="w-full flex justify-center items-center lg:w-1/2 py-3 bg-[#EA4335] text-white font-semibold rounded-lg hover:bg-[#c0372b] transition"
-        @click="signInWithGoogle"
-      >
-        <Icon
-          class="text-white text-[20px] mr-2"
-          icon="ic:baseline-tag-faces"
-        />
-
-        Login With Google
-      </button>
     </form>
+    <button
+      class="w-full flex justify-center items-center lg:w-1/2 py-3 bg-[#EA4335] text-white font-semibold rounded-lg hover:bg-[#c0372b] transition"
+      @click="signInWithGoogle"
+    >
+      <Icon class="text-white text-[20px] mr-2" icon="ic:baseline-tag-faces" />
+
+      Login With Google
+    </button>
   </div>
 </template>
