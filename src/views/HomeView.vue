@@ -1,8 +1,10 @@
 <script setup>
 import Doughnut from "../components/Doughnut.vue";
+import IncomeEntry from "../components/Entry.vue";
 import { ref } from "vue";
 
 const entryView = ref(true);
+const entrySelection = ref("income");
 </script>
 <template>
   <div
@@ -12,9 +14,9 @@ const entryView = ref(true);
     <div
       :class="`${
         entryView ? 'flex' : 'hidden'
-      } bg-slate-700 mb-[16px] md:flex flex-1 md:h-[60vh] h-[100vh] items-center justify-center`"
+      } w-full justify-center items-center mb-[16px] md:flex flex-1 md:h-[60vh] h-[100vh] md:items-start`"
     >
-      Entry Form
+      <IncomeEntry />
     </div>
   </div>
 
