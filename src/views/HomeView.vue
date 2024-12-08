@@ -4,7 +4,6 @@ import IncomeEntry from "../components/Entry.vue";
 import { ref } from "vue";
 
 const entryView = ref(true);
-const entrySelection = ref("income");
 </script>
 <template>
   <div

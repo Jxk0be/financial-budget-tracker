@@ -4,10 +4,30 @@ import { ref } from "vue";
 const expenseVal = ref("");
 const descVal = ref("");
 const amountVal = ref(null);
+
+const clearFields = () => {
+  expenseVal.value = "";
+  descVal.value = "";
+  amountVal.value = null;
+};
+
+const handleExpense = async () => {
+  console.log("handle expense");
+  if (
+    expenseVal.value === "" ||
+    descVal.value === "" ||
+    amountVal.value === null
+  )
+    return;
+
+  // Clean data
+  // await Firestore logic
+  clearFields();
+};
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="handleExpense">
     <div class="mb-6">
       <label for="type" class="block text-sm font-medium text-gray-700"
         >Type</label
