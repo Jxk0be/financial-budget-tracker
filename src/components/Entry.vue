@@ -11,7 +11,7 @@ const handleOptionSelect = (option) => {
 
 <template>
   <div
-    class="bg-white min-w-[200px] mb-[50px] text-black md:rounded-lg shadow-2xl p-8 w-full max-w-[700px] flex flex-col space-y-6"
+    class="bg-white min-w-[200px] md:mt-0 mt-[80px] mb-[50px] text-black md:rounded-lg shadow-2xl p-8 w-full max-w-[700px] flex flex-col space-y-6"
   >
     <div class="flex justify-center space-x-4">
       <button
