@@ -6,9 +6,7 @@ import { ref } from "vue";
 const entryView = ref(true);
 </script>
 <template>
-  <div
-    class="md:pt-[70px] xl:px-0 lg:px-[24px] px-[16px] flex-col flex w-full h-screen"
-  >
+  <div class="md:pt-[70px] xl:px-0 lg:px-[24px] px-[16px] flex-col flex w-full">
     <Doughnut :entryView />
     <div
       :class="`${

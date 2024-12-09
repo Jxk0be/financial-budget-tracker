@@ -57,7 +57,7 @@ onMounted(() => {
 
 <template>
   <Navbar />
-  <div class="mx-auto w-full max-h-screen max-w-[1200px]">
+  <div class="mx-auto w-full min-h-screen max-w-[1200px]">
     <RouterView />
   </div>
 </template>
