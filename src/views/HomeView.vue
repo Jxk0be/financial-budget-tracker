@@ -6,12 +6,12 @@ import { ref } from "vue";
 const entryView = ref(true);
 </script>
 <template>
-  <div class="md:pt-[70px] xl:px-0 lg:px-[24px] px-[16px] flex-col flex w-full">
+  <div class="md:pt-[70px] h-auto xl:px-0 lg:px-[24px] px-[16px] flex-col flex w-full">
     <Doughnut :entryView />
     <div
       :class="`${
         entryView ? 'flex' : 'hidden'
-      } w-full justify-center items-center mb-[16px] md:flex flex-1 md:h-[60vh] h-[100vh] md:items-start`"
+      } w-full justify-center items-center mb-[16px] md:flex flex-1 h-[100vh] md:items-start`"
     >
       <IncomeEntry />
     </div>
