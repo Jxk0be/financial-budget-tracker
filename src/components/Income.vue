@@ -1,9 +1,13 @@
 <script setup>
 import { ref } from "vue";
+import { useAuthStore } from "../stores/authStore";
+import { db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const optionVal = ref("");
 const descVal = ref("");
 const amountVal = ref(null);
+const authStore = useAuthStore();
 
 const clearFields = () => {
   optionVal.value = "";
@@ -11,16 +15,48 @@ const clearFields = () => {
   amountVal.value = null;
 };
 
+const isValidAmount = (amount) => {
+  let regex = /^\d+(\.\d{1,2})?$/;
+  return regex.test(amount);
+};
+
 const handleIncome = async () => {
-  console.log("handle income");
   if (
     optionVal.value === "" ||
     descVal.value === "" ||
     amountVal.value === null
   )
     return;
-  // Clean data
-  // await Firestore logic
+
+  if (!isValidAmount(amountVal.value)) {
+    console.log("Invalid amount value");
+    return;
+  }
+
+  const currentDate = new Date().toString();
+
+  let incomeData = {
+    category: optionVal.value,
+    amount: amountVal.value,
+    description: descVal.value,
+    date: currentDate,
+  };
+
+  try {
+    const userRef = doc(db, "users", authStore.userInstance?.user?.uid);
+    const docSnap = await getDoc(userRef);
+    const userData = docSnap.data();
+    let income = userData?.income || [];
+    await setDoc(
+      userRef,
+      {
+        income: [...income, incomeData],
+      },
+      { merge: true }
+    );
+  } catch (error) {
+    console.log("handleIncome():", error);
+  }
   clearFields();
 };
 </script>

@@ -1,9 +1,13 @@
 <script setup>
 import { ref } from "vue";
+import { useAuthStore } from "../stores/authStore";
+import { db } from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const expenseVal = ref("");
 const descVal = ref("");
 const amountVal = ref(null);
+const authStore = useAuthStore();
 
 const clearFields = () => {
   expenseVal.value = "";
@@ -11,8 +15,12 @@ const clearFields = () => {
   amountVal.value = null;
 };
 
+const isValidAmount = (amount) => {
+  let regex = /^\d+(\.\d{1,2})?$/;
+  return regex.test(amount);
+};
+
 const handleExpense = async () => {
-  console.log("handle expense");
   if (
     expenseVal.value === "" ||
     descVal.value === "" ||
@@ -20,8 +28,35 @@ const handleExpense = async () => {
   )
     return;
 
-  // Clean data
-  // await Firestore logic
+  if (!isValidAmount(amountVal.value)) {
+    console.log("Invalid amount value");
+    return;
+  }
+
+  const currentDate = new Date().toString();
+
+  let expenseData = {
+    category: expenseVal.value,
+    amount: amountVal.value,
+    description: descVal.value,
+    date: currentDate,
+  };
+
+  try {
+    const userRef = doc(db, "users", authStore.userInstance?.user?.uid);
+    const docSnap = await getDoc(userRef);
+    const userData = docSnap.data();
+    let expenses = userData?.income || [];
+    await setDoc(
+      userRef,
+      {
+        expenses: [...expenses, expenseData],
+      },
+      { merge: true }
+    );
+  } catch (error) {
+    console.log("handleExpense():", error);
+  }
   clearFields();
 };
 </script>
@@ -73,6 +108,7 @@ const handleExpense = async () => {
       <input
         id="amount"
         type="number"
+        step="0.01"
         v-model="amountVal"
         class="mt-2 block w-full px-4 py-3 bg-gray-100 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
       />
