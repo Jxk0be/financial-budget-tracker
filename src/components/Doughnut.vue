@@ -9,6 +9,10 @@ const props = defineProps({
   },
 });
 
+// TODO: Write logic for showing empty data (use this fake data here)
+// TODO: Write logic to show expense or income chart based on what's already selected (refactor state to pinia store)
+// TODO: Write logic for mobile view to show a toggle button for ease-of-use
+
 const data = {
   datasets: [
     {
