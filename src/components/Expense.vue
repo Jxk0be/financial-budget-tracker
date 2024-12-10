@@ -46,7 +46,7 @@ const handleExpense = async () => {
     const userRef = doc(db, "users", authStore.userInstance?.user?.uid);
     const docSnap = await getDoc(userRef);
     const userData = docSnap.data();
-    let expenses = userData?.income || [];
+    let expenses = userData?.expenses || [];
     await setDoc(
       userRef,
       {

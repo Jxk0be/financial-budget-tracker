@@ -2,24 +2,26 @@
 import { ref } from "vue";
 import Income from "./Income.vue";
 import Expense from "./Expense.vue";
+import { useOptionStore } from "../stores/selectedOption";
 
-const selectedOption = ref("income");
+const optionStore = useOptionStore();
+
 const handleOptionSelect = (option) => {
-  selectedOption.value = option;
+  optionStore.setSelectedOption(option);
 };
 </script>
 
 <template>
   <div
-    class="bg-white min-w-[200px] md:mt-0 mt-[80px] mb-[50px] text-black md:rounded-lg shadow-2xl p-8 w-full max-w-[700px] flex flex-col space-y-6"
+    class="bg-white z-2 min-w-[200px] md:mt-0 mt-[80px] mb-[50px] text-black md:rounded-lg shadow-2xl p-8 w-full max-w-[700px] flex flex-col space-y-6"
   >
     <div class="flex justify-center space-x-4">
       <button
         @click="handleOptionSelect('income')"
         :class="{
-          'bg-green-600 text-white': selectedOption === 'income',
+          'bg-green-600 text-white': optionStore.selectedOption === 'income',
           'bg-white border border-gray-300 text-black':
-            selectedOption !== 'income',
+            optionStore.selectedOption !== 'income',
         }"
         class="w-1/2 py-3 font-medium rounded-lg shadow-md hover:text-white hover:bg-green-700 transition duration-300"
       >
@@ -28,9 +30,9 @@ const handleOptionSelect = (option) => {
       <button
         @click="handleOptionSelect('expense')"
         :class="{
-          'bg-red-600 text-white': selectedOption === 'expense',
+          'bg-red-600 text-white': optionStore.selectedOption === 'expense',
           'bg-white border border-gray-300 text-black':
-            selectedOption !== 'expense',
+            optionStore.selectedOption !== 'expense',
         }"
         class="w-1/2 py-3 font-medium rounded-lg shadow-md hover:text-white hover:bg-red-700 transition duration-300"
       >
@@ -41,10 +43,10 @@ const handleOptionSelect = (option) => {
     <h2
       class="text-3xl font-semibold mb-6 capitalize text-center text-gray-800"
     >
-      Enter {{ selectedOption }}
+      Enter {{ optionStore.selectedOption }}
     </h2>
 
-    <Income v-if="selectedOption === 'income'" />
-    <Expense v-if="selectedOption === 'expense'" />
+    <Income v-if="optionStore.selectedOption === 'income'" />
+    <Expense v-if="optionStore.selectedOption === 'expense'" />
   </div>
 </template>
